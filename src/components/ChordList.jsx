@@ -28,14 +28,19 @@ const ChordList = () => {
     }, 1);
   };
 
-  const chordTypes = ["maj", "m"];
+  const chordTypes = ["maj", "maj7", "m"];
 
   return (
     <div className="flex flex-col gap-4 items-center justify-center">
       <div className="flex flex-row gap-4 items-center justify-center">
-        <div className="w-16 p-4 rounded text-center">Note</div>
+        <div className="p-4 text-center rounded cursor-pointer text-sm lg:text-base w-16 lg:w-20 px-2 lg:px-4 py-4">
+          Note
+        </div>
         {chordTypes.map((chordType, index) => (
-          <div key={index} className="w-20 text-center font-bold">
+          <div
+            key={index}
+            className="p-4 text-center rounded cursor-pointer text-sm lg:text-base w-16 lg:w-20 px-2 lg:px-4 py-4"
+          >
             {chordType}
           </div>
         ))}
@@ -44,7 +49,7 @@ const ChordList = () => {
       {Object.keys(chords).map((chordNote, index) => {
         return (
           <div key={index} className="flex flex-row gap-4 items-center">
-            <div className="w-16 border border-white p-4 rounded text-center">
+            <div className="border border-white p-4 text-center rounded cursor-pointer text-sm lg:text-base w-16 lg:w-20 px-2 lg:px-4 py-4">
               {chordNote}
             </div>
             {Object.keys(chords[chordNote]).map((chord, index2) => {
@@ -58,7 +63,7 @@ const ChordList = () => {
         );
       })}
       <div
-        className="bg-sky-700 p-4 w-full text-center rounded  cursor-pointer"
+        className="bg-sky-700 hover:bg-sky-600 transition-colors p-4 w-full text-center rounded  cursor-pointer"
         onClick={() => stopCurrentNotes()}
       >
         Stop
