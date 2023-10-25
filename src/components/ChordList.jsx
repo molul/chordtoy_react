@@ -105,7 +105,7 @@ const ChordList = () => {
         {chordTypes.map((chordType, index) => (
           <div
             key={index}
-            className="bg-zinc-700 text-center rounded cursor-pointer text-sm lg:text-base w-14 lg:w-20 px-2 lg:px-4 py-4"
+            className="bg-zinc-700 text-center rounded cursor-pointer text-sm lg:text-base w-12 lg:w-20 px-1 lg:px-4 py-3"
           >
             {chordType}
           </div>
@@ -116,7 +116,7 @@ const ChordList = () => {
         return (
           <div key={index} className="flex flex-row gap-2 items-center">
             <div
-              className=" bg-zinc-700 hover:bg-zinc-600 transition-colors text-center rounded cursor-pointer text-xs lg:text-base w-14 lg:w-20 px-2 lg:px-4 py-4 font-bold"
+              className=" bg-zinc-700 hover:bg-zinc-600 transition-colors text-center rounded cursor-pointer text-xs lg:text-base w-14 lg:w-20 px-1 lg:px-4 py-3 font-bold"
               onClick={() => playNote(chordNote)}
             >
               {chordNote}
