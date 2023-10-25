@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 import * as Tone from "tone";
-import { chords } from "../data/chords";
 import Chord from "./Chord";
 
 const synth = new Tone.PolySynth(Tone.Synth).toDestination();
 const now = Tone.now();
 const notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+const chordTypes = ["maj", "maj7", "m", "m7"];
 
 const ChordList = () => {
   const [currentTones, setCurrentTones] = useState([]);
@@ -18,8 +18,9 @@ const ChordList = () => {
   //play a middle 'C' for the duration of an 8th note
   const play = (chordNote, chordType) => {
     stopCurrentNotes();
-    calculateChord(chordNote, chordType);
-    const chordToPlay = chords[chordNote][chordType];
+    // calculateChord(chordNote, chordType);
+    const chordToPlay = calculateChord(chordNote, chordType);
+    // const chordToPlay = chords[chordNote][chordType];
 
     setCurrentTones(chordToPlay);
 
@@ -30,32 +31,70 @@ const ChordList = () => {
     }, 1);
   };
 
-  const getRelativeNote = (note, semitones) => {
-    let relNoteIndex = notes.indexOf(note) + semitones;
-    if (relNoteIndex > notes.length) {
-      relNoteIndex -= notes.length;
-    }
+  const playNote = (note) => {
+    stopCurrentNotes();
+    setCurrentTones([note + "4"]);
 
-    // console.log("REL NOTE INDEX: " + relNoteIndex);
-    // console.log("REL NOTE: " + notes[relNoteIndex]);
+    setTimeout(() => {
+      synth.triggerAttack([note + "4"], now);
+    }, 1);
+  };
+
+  const getRelativeNote = (note, semitones, baseOctave) => {
+    let relNoteIndex = notes.indexOf(note) + semitones;
+    let relNoteOctave = baseOctave;
+    if (relNoteIndex >= notes.length) {
+      relNoteIndex -= notes.length;
+      relNoteOctave = baseOctave + 1;
+    }
     const relNote = notes[relNoteIndex];
-    return { index: relNoteIndex, note: relNote };
+    return { index: relNoteIndex, note: relNote, octave: relNoteOctave };
   };
 
   const calculateChord = (note, chordType) => {
-    const noteIndex = notes.indexOf(note);
-    const baseOctave = noteIndex <= 2 ? 4 : 5;
-    console.log("BASE OCTAVE: " + baseOctave);
-    console.log("NOTE INDEX: " + noteIndex);
+    const baseOctave = 4;
+    // console.log("BASE OCTAVE: " + baseOctave);
+    // console.log("NOTE: " + note + baseOctave);
+    const notes = [note + baseOctave.toString()];
     if (chordType === "maj") {
-      let relNote = getRelativeNote(note, 4);
-      console.log(relNote.index);
-      console.log(relNote.note);
+      let relNote1 = getRelativeNote(note, 4, baseOctave);
+      let relNote2 = getRelativeNote(note, 7, baseOctave);
+      notes.push(
+        relNote1.note + relNote1.octave,
+        relNote2.note + relNote2.octave
+      );
     }
-    return note;
-  };
+    if (chordType === "maj7") {
+      let relNote1 = getRelativeNote(note, 4, baseOctave);
+      let relNote2 = getRelativeNote(note, 7, baseOctave);
+      let relNote3 = getRelativeNote(note, 11, baseOctave);
+      notes.push(
+        relNote1.note + relNote1.octave,
+        relNote2.note + relNote2.octave,
+        relNote3.note + relNote3.octave
+      );
+    }
+    if (chordType === "m") {
+      let relNote1 = getRelativeNote(note, 3, baseOctave);
+      let relNote2 = getRelativeNote(note, 7, baseOctave);
+      notes.push(
+        relNote1.note + relNote1.octave,
+        relNote2.note + relNote2.octave
+      );
+    }
+    if (chordType === "m7") {
+      let relNote1 = getRelativeNote(note, 3, baseOctave);
+      let relNote2 = getRelativeNote(note, 7, baseOctave);
+      let relNote3 = getRelativeNote(note, 10, baseOctave);
+      notes.push(
+        relNote1.note + relNote1.octave,
+        relNote2.note + relNote2.octave,
+        relNote3.note + relNote3.octave
+      );
+    }
 
-  const chordTypes = ["maj", "maj7", "m", "m7"];
+    return notes;
+  };
 
   return (
     <div className="flex flex-col gap-2 items-center justify-center">
@@ -73,13 +112,16 @@ const ChordList = () => {
         ))}
       </div>
 
-      {Object.keys(chords).map((chordNote, index) => {
+      {notes.map((chordNote, index) => {
         return (
           <div key={index} className="flex flex-row gap-2 items-center">
-            <div className=" bg-zinc-700 text-center rounded cursor-pointer text-xs lg:text-base w-14 lg:w-20 px-2 lg:px-4 py-4 font-bold">
+            <div
+              className=" bg-zinc-700 hover:bg-zinc-600 transition-colors text-center rounded cursor-pointer text-xs lg:text-base w-14 lg:w-20 px-2 lg:px-4 py-4 font-bold"
+              onClick={() => playNote(chordNote)}
+            >
               {chordNote}
             </div>
-            {Object.keys(chords[chordNote]).map((chordType, index2) => {
+            {chordTypes.map((chordType, index2) => {
               return (
                 <div key={`${index}-${index2}`}>
                   <Chord
