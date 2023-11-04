@@ -1,12 +1,20 @@
 import ChordsGrid from "./ChordsGrid";
 import NotesList from "./NotesList";
+import Header from "./Header";
+import Footer from "./Footer";
+import { useState } from "react";
 
 const Layout = () => {
+  const [pianoNotes, setPianoNotes] = useState([]);
+
   return (
-    // <div className="text-white flex flex-col justify-between min-h-screen bg-black bg-opacity-20 overflow-hidden">
-    <div className="min-h-screen flex flex-col bg-zinc-600 p-2 w-full text-white space-y-2">
-      <ChordsGrid />
-      <NotesList />
+    <div className="min-h-screen flex flex-col bg-zinc-200 w-full text-white ">
+      <Header />
+      <div className="p-2 space-y-2">
+        <ChordsGrid setPianoNotes={setPianoNotes} />
+        <NotesList pianoNotes={pianoNotes} />
+      </div>
+      <Footer />
     </div>
   );
 };

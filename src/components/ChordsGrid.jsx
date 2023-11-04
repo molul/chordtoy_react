@@ -4,15 +4,16 @@ import * as Tone from "tone";
 import Chord from "./Chord";
 import { chordTypes } from "../data/chordTypes";
 import { notes } from "../data/notes";
-import { calculateChord } from "../lib/getChords";
+import { calculateChord, getPianoNotes } from "../lib/getChords";
 import ChordHeader from "./ChordHeader";
 import ChordType from "./ChordType";
 import StopButton from "./StopButton";
 
 const synth = new Tone.PolySynth(Tone.Synth).toDestination();
+synth.volume.value = -5;
 const now = Tone.now();
 
-const ChordsGrid = () => {
+const ChordsGrid = ({ setPianoNotes }) => {
   // const [octave, setOctave] = useState("4");
   const octave = 3;
   const [currentTones, setCurrentTones] = useState([]);
@@ -28,6 +29,8 @@ const ChordsGrid = () => {
     const chordToPlay = calculateChord(octave, chordNote, chordType);
 
     setCurrentTones(chordToPlay);
+
+    setPianoNotes(getPianoNotes(chordNote, chordType));
 
     setTimeout(() => {
       chordToPlay.map((note) => {
@@ -46,7 +49,7 @@ const ChordsGrid = () => {
   };
 
   return (
-    <div className="flex flex-col gap-2 items-center justify-center w-full max-w-lg mx-auto">
+    <div className="flex flex-col gap-2 items-center justify-center w-full h-full max-w-lg mx-auto">
       {/* StopButton and chord types list */}
       <div className="w-full">
         <div className="grid grid-cols-6 gap-2">
