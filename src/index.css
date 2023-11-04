@@ -6,4 +6,26 @@
   body {
     @apply bg-blue-400;
   }
+  @font-face {
+    font-family: ToyBox;
+    src: url("/fonts/ToyBoxBlocksLine.woff2") format("woff2");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: ToyBox2;
+    src: url("/fonts/ToyBox.ttf") format("truetype");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: Cartoon;
+    font-weight: "400";
+    src: url("/fonts/Cartoon Toy Turbo.woff") format("woff");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: Cartoon;
+    font-weight: "700";
+    src: url("/fonts/Cartoon Toy Turbo Bold.woff") format("woff");
+    font-display: swap;
+  }
 }

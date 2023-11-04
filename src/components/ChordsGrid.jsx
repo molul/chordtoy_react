@@ -49,10 +49,10 @@ const ChordsGrid = ({ setPianoNotes }) => {
   };
 
   return (
-    <div className="flex flex-col gap-2 items-center justify-center w-full h-full max-w-lg mx-auto">
+    <div className="flex flex-col gap-1 items-center justify-center w-full h-full max-w-lg mx-auto">
       {/* StopButton and chord types list */}
       <div className="w-full">
-        <div className="grid grid-cols-6 gap-2">
+        <div className="grid grid-cols-6 gap-1">
           <StopButton stopCurrentNotes={stopCurrentNotes} />
 
           {chordTypes.map((chordType, index) => (
@@ -64,10 +64,10 @@ const ChordsGrid = ({ setPianoNotes }) => {
       </div>
 
       {/* Chords list */}
-      <div className="space-y-2 w-full">
+      <div className="space-y-1 w-full">
         {notes.map((note, index) => {
           return (
-            <div key={index} className="grid grid-cols-6 gap-2">
+            <div key={index} className="grid grid-cols-6 gap-1">
               <ChordHeader note={note} playNote={playNote} />
 
               {chordTypes.map((chordType, index2) => {

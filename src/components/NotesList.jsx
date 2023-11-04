@@ -45,7 +45,7 @@ const NotesList = ({ pianoNotes }) => {
     }
   };
 
-  let notesArray = [...Array(13).keys()].slice(1);
+  let notesArray = [...Array(10).keys()].slice(1);
 
   return (
     <div className="flex flex-row gap-1 items-center justify-center w-full max-w-lg mx-auto">
@@ -54,19 +54,10 @@ const NotesList = ({ pianoNotes }) => {
         return (
           <div
             key={index}
-            className=" text-black shadow-lg w-full h-20 hover:bg-amber-200 transition-colors duration-200 cursor-pointer font-semibold "
-            onClick={() => playNote(pianoNotes[index])}
+            className=" text-zinc-800 shadow-lg w-full h-20 transition-colors duration-200 cursor-pointer font-semibold text-xs sm:text-sm md:text-base flex items-end  justify-center  bg-mainOrange hover:bg-mainOrangeLight pb-1"
+            onMouseEnter={() => playNote(pianoNotes[index])}
           >
-            <div
-              className={`text-xs sm:text-sm md:text-base flex items-end  justify-center w-full h-full 
-							${index < 3 && "bg-amber-400"}
-							${index >= 3 && index < 6 && "bg-amber-300"}
-							${index >= 6 && index < 9 && "bg-amber-400"}
-							${index >= 9 && "bg-amber-300"}
-							`}
-            >
-              {pianoNotes[index]}
-            </div>
+            {pianoNotes[index]}
           </div>
         );
       })}
