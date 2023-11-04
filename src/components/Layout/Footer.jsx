@@ -5,7 +5,7 @@ const Footer = () => {
       <div>
         Developed by{" "}
         <a
-          className="font-bold"
+          className="text-mainOrange hover:text-mainOrangeLight transition-colors duration-300"
           href="https://www.luismorcilloluque.com/"
           target="_blank"
           rel="noreferrer"

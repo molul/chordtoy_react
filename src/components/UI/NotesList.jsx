@@ -3,7 +3,7 @@ import * as Tone from "tone";
 const synth = new Tone.MonoSynth({
   volume: -8,
   oscillator: {
-    type: "triangle1",
+    type: "sawtooth",
   },
   envelope: {
     attack: 0.05,
