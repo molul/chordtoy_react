@@ -54,8 +54,8 @@ const NotesList = ({ pianoNotes }) => {
         return (
           <div
             key={index}
-            className=" text-zinc-800 shadow-lg w-full h-20 transition-colors duration-200 cursor-pointer font-semibold text-xs sm:text-sm md:text-base flex items-end  justify-center  bg-mainOrange hover:bg-mainOrangeLight pb-1"
-            onMouseEnter={() => playNote(pianoNotes[index])}
+            className="rounded text-zinc-700 shadow-lg w-full h-20 transition-colors duration-200 cursor-pointer font-semibold text-sm md:text-base flex items-end  justify-center  bg-mainOrange hover:bg-mainOrangeLight pb-1"
+            onClick={() => playNote(pianoNotes[index])}
           >
             {pianoNotes[index]}
           </div>

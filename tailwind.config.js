@@ -12,6 +12,7 @@ export default {
         mainOrange: "#fcb71e",
         mainOrangeLight: "#f9ce6f",
         mainOlive: "#bdd549",
+        mainOliveLight: "#d2ea5c",
         mainPurple: "#8f57a2",
       },
       fontFamily: {
