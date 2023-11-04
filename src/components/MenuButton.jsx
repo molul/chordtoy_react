@@ -10,8 +10,8 @@ const MenuButton = ({ menuOpen, toggleMenu }) => {
         }`}
       />
       <span
-        className={`h-2 w-2 bg-white rounded-lg transition-all duration-300 ease-in-out ${
-          menuOpen ? "w-0" : "w-full"
+        className={`h-2  bg-white rounded-lg transition-all duration-300 ease-in-out ${
+          menuOpen ? " w-0 " : " w-2 "
         }`}
       />
       <span
