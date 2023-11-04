@@ -11,8 +11,8 @@ export default {
         mainBlue: "#3d81c2",
         mainOrange: "#fcb71e",
         mainOrangeLight: "#f9ce6f",
-        mainOlive: "#bdd549",
-        mainOliveLight: "#d2ea5c",
+        mainOlive: "#cce64e",
+        mainOliveLight: "#e7fc7c",
         mainPurple: "#8f57a2",
       },
       fontFamily: {

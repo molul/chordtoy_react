@@ -11,7 +11,7 @@ const Octave = ({ options, setOptions }) => {
 
       <div className="flex space-x-4 items-center justify-center ">
         <div
-          className="bg-white bg-opacity-20 w-10 h-10 flex items-center justify-center rounded-full px-2 font-bold"
+          className="bg-white bg-opacity-20 w-10 h-10 flex items-center justify-center rounded-full px-2 font-bold cursor-pointer"
           onClick={() => updateOctave(options.octave - 1)}
         >
           -
@@ -20,7 +20,7 @@ const Octave = ({ options, setOptions }) => {
         <div>{options.octave}</div>
 
         <div
-          className="bg-white bg-opacity-20 w-10 h-10 flex items-center justify-center rounded-full px-2 font-bold"
+          className="bg-white bg-opacity-20 w-10 h-10 flex items-center justify-center rounded-full px-2 font-bold cursor-pointer"
           onClick={() => updateOctave(options.octave + 1)}
         >
           +
