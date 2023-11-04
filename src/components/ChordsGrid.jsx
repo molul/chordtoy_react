@@ -13,7 +13,8 @@ const synth = new Tone.PolySynth(Tone.Synth).toDestination();
 const now = Tone.now();
 
 const ChordsGrid = () => {
-  const [octave, setOctave] = useState("4");
+  // const [octave, setOctave] = useState("4");
+  const octave = 3;
   const [currentTones, setCurrentTones] = useState([]);
 
   const stopCurrentNotes = () => {
@@ -24,7 +25,7 @@ const ChordsGrid = () => {
   const play = (chordNote, chordType) => {
     stopCurrentNotes();
 
-    const chordToPlay = calculateChord(chordNote, chordType);
+    const chordToPlay = calculateChord(octave, chordNote, chordType);
 
     setCurrentTones(chordToPlay);
 
@@ -48,7 +49,7 @@ const ChordsGrid = () => {
     <div className="flex flex-col gap-2 items-center justify-center w-full max-w-lg mx-auto">
       {/* StopButton and chord types list */}
       <div className="w-full">
-        <div className="grid grid-cols-5 gap-2">
+        <div className="grid grid-cols-6 gap-2">
           <StopButton stopCurrentNotes={stopCurrentNotes} />
 
           {chordTypes.map((chordType, index) => (
@@ -63,7 +64,7 @@ const ChordsGrid = () => {
       <div className="space-y-2 w-full">
         {notes.map((note, index) => {
           return (
-            <div key={index} className="grid grid-cols-5 gap-2">
+            <div key={index} className="grid grid-cols-6 gap-2">
               <ChordHeader note={note} playNote={playNote} />
 
               {chordTypes.map((chordType, index2) => {

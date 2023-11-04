@@ -11,23 +11,33 @@ const getRelativeNote = (note, semitones, baseOctave) => {
   return { index: relNoteIndex, note: relNote, octave: relNoteOctave };
 };
 
-export const calculateChord = (note, chordType) => {
-  const baseOctave = 4;
+export const calculateChord = (octave, note, chordType) => {
+  // const baseOctave = 3;
   // console.log("BASE OCTAVE: " + baseOctave);
   // console.log("NOTE: " + note + baseOctave);
-  const notes = [note + baseOctave.toString()];
+  const notes = [note + octave.toString()];
   if (chordType === "maj") {
-    let relNote1 = getRelativeNote(note, 4, baseOctave);
-    let relNote2 = getRelativeNote(note, 7, baseOctave);
+    let relNote1 = getRelativeNote(note, 4, octave);
+    let relNote2 = getRelativeNote(note, 7, octave);
     notes.push(
       relNote1.note + relNote1.octave,
       relNote2.note + relNote2.octave
     );
   }
   if (chordType === "maj7") {
-    let relNote1 = getRelativeNote(note, 4, baseOctave);
-    let relNote2 = getRelativeNote(note, 7, baseOctave);
-    let relNote3 = getRelativeNote(note, 11, baseOctave);
+    let relNote1 = getRelativeNote(note, 4, octave);
+    let relNote2 = getRelativeNote(note, 7, octave);
+    let relNote3 = getRelativeNote(note, 11, octave);
+    notes.push(
+      relNote1.note + relNote1.octave,
+      relNote2.note + relNote2.octave,
+      relNote3.note + relNote3.octave
+    );
+  }
+  if (chordType === "7") {
+    let relNote1 = getRelativeNote(note, 4, octave);
+    let relNote2 = getRelativeNote(note, 7, octave);
+    let relNote3 = getRelativeNote(note, 10, octave);
     notes.push(
       relNote1.note + relNote1.octave,
       relNote2.note + relNote2.octave,
@@ -35,17 +45,17 @@ export const calculateChord = (note, chordType) => {
     );
   }
   if (chordType === "m") {
-    let relNote1 = getRelativeNote(note, 3, baseOctave);
-    let relNote2 = getRelativeNote(note, 7, baseOctave);
+    let relNote1 = getRelativeNote(note, 3, octave);
+    let relNote2 = getRelativeNote(note, 7, octave);
     notes.push(
       relNote1.note + relNote1.octave,
       relNote2.note + relNote2.octave
     );
   }
   if (chordType === "m7") {
-    let relNote1 = getRelativeNote(note, 3, baseOctave);
-    let relNote2 = getRelativeNote(note, 7, baseOctave);
-    let relNote3 = getRelativeNote(note, 10, baseOctave);
+    let relNote1 = getRelativeNote(note, 3, octave);
+    let relNote2 = getRelativeNote(note, 7, octave);
+    let relNote3 = getRelativeNote(note, 10, octave);
     notes.push(
       relNote1.note + relNote1.octave,
       relNote2.note + relNote2.octave,
