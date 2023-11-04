@@ -1,21 +1,22 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
-import * as Tone from "tone";
-import Chord from "./Chord";
 import { chordTypes } from "../data/chordTypes";
 import { notes } from "../data/notes";
+import * as Tone from "tone";
 import { calculateChord, getPianoNotes } from "../lib/getChords";
+import Chord from "./Chord";
 import ChordHeader from "./ChordHeader";
 import ChordType from "./ChordType";
 import StopButton from "./StopButton";
+import { OptionsContext } from "../contexts/OptionsContext";
 
 const synth = new Tone.PolySynth(Tone.Synth).toDestination();
 synth.volume.value = -5;
 const now = Tone.now();
 
 const ChordsGrid = ({ setPianoNotes }) => {
-  // const [octave, setOctave] = useState("4");
-  const octave = 3;
+  const { options, setOptions } = useContext(OptionsContext);
+
   const [currentTones, setCurrentTones] = useState([]);
 
   const stopCurrentNotes = () => {
@@ -26,7 +27,7 @@ const ChordsGrid = ({ setPianoNotes }) => {
   const play = (chordNote, chordType) => {
     stopCurrentNotes();
 
-    const chordToPlay = calculateChord(octave, chordNote, chordType);
+    const chordToPlay = calculateChord(options.octave, chordNote, chordType);
 
     setCurrentTones(chordToPlay);
 
@@ -41,10 +42,10 @@ const ChordsGrid = ({ setPianoNotes }) => {
 
   const playNote = (note) => {
     stopCurrentNotes();
-    setCurrentTones([note + octave]);
+    setCurrentTones([note + options.octave]);
 
     setTimeout(() => {
-      synth.triggerAttack([note + octave], now);
+      synth.triggerAttack([note + options.octave], now);
     }, 1);
   };
 
