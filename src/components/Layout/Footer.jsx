@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     // <div className="text-white flex flex-col justify-between min-h-screen bg-black bg-opacity-20 overflow-hidden">
-    <div className="bg-mainBlue p-3 w-full text-white space-y-2 text-center">
+    <div className="bg-mainBlue p-3 w-full text-white space-y-2 text-center z-10">
       <div>
         Developed by{" "}
         <a
